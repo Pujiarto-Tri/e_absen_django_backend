@@ -16,7 +16,7 @@ class Attendance(models.Model):
     class Meta:
         verbose_name_plural = "Attendances"
         verbose_name = "Attendance"
-        unique_together = ('user_name', 'attendance_date')  # Ensure only one record per user per date
+        unique_together = ('user', 'attendance_date')  # Ensure only one record per user per date
 
     def save(self, *args, **kwargs):
         # Check if the attendance date falls on a weekend (Saturday or Sunday)
