@@ -1,1 +1,2 @@
 web: gunicorn e_absen_django.wsgi
+release: python manage.py collectstatic --noinput
