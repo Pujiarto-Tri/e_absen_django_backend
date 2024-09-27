@@ -160,3 +160,20 @@ CORS_ALLOWED_ORIGINS = [
     'https://example.com',  # Replace with your mobile app's domain or IP
     'https://eabsendjangobackend-production.up.railway.app',
 ]
+
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+    'x-csrftoken',
+    'x-requested-with',
+    'accept',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
