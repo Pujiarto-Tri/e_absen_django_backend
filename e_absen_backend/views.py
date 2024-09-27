@@ -1,14 +1,14 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from e_absen_backend.models.serializers import UserIdSerializer  # Import your updated UserIdSerializer
+from e_absen_backend.models.serializers import UserIdSerializer
 
 class UserRegistrationView(generics.CreateAPIView):
-    serializer_class = UserIdSerializer  # Use the UserIdSerializer for registration
+    serializer_class = UserIdSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user_profile = serializer.save()  # This will call the create method of UserIdSerializer
+        user_profile = serializer.save()
 
         return Response({
             'user': {
