@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # application specific
     'e_absen_backend',
     'rest_framework',
-    # 'corsheaders', 
+    'corsheaders', 
 ]
 
 MIDDLEWARE = [
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #cors
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     # WhiteNoise middleware should be listed after security middleware
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -152,3 +152,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # For local development (React/Flutter Web, etc.)
+    'https://example.com',  # Replace with your mobile app's domain or IP
+    'https://eabsendjangobackend-production.up.railway.app',
+]

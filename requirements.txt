@@ -6,3 +6,4 @@ sqlparse==0.5.1
 tzdata==2024.1
 gunicorn
 whitenoise
+django-cors-headers
