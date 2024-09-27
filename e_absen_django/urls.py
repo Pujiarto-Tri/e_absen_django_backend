@@ -23,7 +23,7 @@ from e_absen_backend.views import UserRegistrationView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('e_absen_backend/', include("e_absen_backend.urls")),
-    path('api/register/', UserRegistrationView.as_view, name='user_registration'),
+    path('api/register/', UserRegistrationView.as_view(), name='user_registration'),
     
 ]
 

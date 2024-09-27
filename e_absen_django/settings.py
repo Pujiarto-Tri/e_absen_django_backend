@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^sg8@zlx80_ke=gt-=vhre1d6t2s^+k(!%$csy(86eotj+@+d%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['eabsendjangobackend-production.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['eabsendjangobackend-production.up.railway.app', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://eabsendjangobackend-production.up.railway.app']
 
 # Application definition
@@ -155,11 +155,11 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # For local development (React/Flutter Web, etc.)
-    'https://example.com',  # Replace with your mobile app's domain or IP
-    'https://eabsendjangobackend-production.up.railway.app',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',  # For local development (React/Flutter Web, etc.)
+#     'https://example.com',  # Replace with your mobile app's domain or IP
+#     'https://eabsendjangobackend-production.up.railway.app',
+# ]
 
 CORS_ALLOW_HEADERS = [
     'authorization',
