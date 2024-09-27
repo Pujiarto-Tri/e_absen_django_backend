@@ -13,29 +13,25 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserIdSerializer(serializers.ModelSerializer):
     user_id = UserSerializer()
-    user_role = serializers.PrimaryKeyRelatedField(queryset=Role.objects.all())
-    user_shift = serializers.PrimaryKeyRelatedField(queryset=Shift.objects.all())
-    user_location = serializers.PrimaryKeyRelatedField(queryset=Location.objects.all())
+    user_role = serializers.PrimaryKeyRelatedField(queryset=Role.objects.all(), required=False, allow_null=True)
+    user_shift = serializers.PrimaryKeyRelatedField(queryset=Shift.objects.all(), required=False, allow_null=True)
+    user_location = serializers.PrimaryKeyRelatedField(queryset=Location.objects.all(), required=False, allow_null=True)
 
     class Meta:
         model = User_Id
         fields = ['user_id', 'user_avatar', 'user_name', 'is_active', 'user_role', 'user_payout', 'user_shift', 'user_location']
+        extra_kwargs = {
+            'user_name': {'required': False, 'allow_null': True},
+            'user_payout': {'required': False, 'allow_null': True},
+        }
 
     def create(self, validated_data):
         user_data = validated_data.pop('user_id')
         password = user_data.pop('password')
-        user = User(**user_data)
-        user.set_password(password)
-        user.save()
+        user = User.objects.create_user(**user_data, password=password)
 
         user_profile = User_Id.objects.create(
             user_id=user,
-            user_avatar=validated_data.get('user_avatar'),
-            user_name=validated_data.get('user_name'),
-            is_active=validated_data.get('is_active', True),
-            user_role=validated_data.get('user_role'),
-            user_payout=validated_data.get('user_payout'),
-            user_shift=validated_data.get('user_shift'),
-            user_location=validated_data.get('user_location'),
+            **validated_data
         )
         return user_profile
