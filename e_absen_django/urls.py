@@ -19,12 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from e_absen_backend.views import UserRegistrationView
+from e_absen_backend.views import login_view
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('e_absen_backend/', include("e_absen_backend.urls")),
     path('api/register/', UserRegistrationView.as_view(), name='user_registration'),
-    
+    path('api/login/', login_view, name='login'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:
