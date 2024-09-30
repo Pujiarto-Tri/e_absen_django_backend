@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from e_absen_backend.models.model_user import User_Id
+from e_absen_backend.models.model_user import Employee
 from rest_framework import generics, status
 from django.http import JsonResponse
 
@@ -19,21 +19,21 @@ class UserSerializer(serializers.ModelSerializer):
         )
         return user
 
-class UserIdSerializer(serializers.ModelSerializer):
+class EmployeeSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
     class Meta:
-        model = User_Id
+        model = Employee
         fields = ('user', 'name', 'user_avatar', 'user_role', 'user_payout', 'user_shift', 'user_location')
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = UserSerializer().create(user_data)
-        user_id = User_Id.objects.create(user_id=user, **validated_data)
+        user_id = Employee.objects.create(user_id=user, **validated_data)
         return user_id
 
 class UserRegistrationView(generics.CreateAPIView):
-    serializer_class = UserIdSerializer
+    serializer_class = EmployeeSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

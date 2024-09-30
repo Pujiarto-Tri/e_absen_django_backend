@@ -1,10 +1,10 @@
 from django.db import models
-from e_absen_backend.models.model_user import User_Id
+from e_absen_backend.models.model_user import Employee
 from datetime import time, date
 from e_absen_backend.models.model_shift_time import Shift  # Import the Shift model
 
 class Attendance(models.Model):
-    user = models.ForeignKey(User_Id, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
     shift = models.ForeignKey(Shift, on_delete=models.SET_NULL, null=True)  # Reference to the Shift model
     attendance_date = models.DateField(auto_now_add=True)
     check_in_time = models.TimeField(null=True, blank=True)  # Actual check-in time
