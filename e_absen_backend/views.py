@@ -7,17 +7,17 @@ from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
 from .serializers import EmployeeSerializer
 
-@permission_classes([AllowAny])
 class UserRegistrationView(generics.CreateAPIView):
     serializer_class = EmployeeSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            user_profile = serializer.save()
+            employee = serializer.save()
             return JsonResponse({
                 'user': {
-                    'email': user_profile.user.email,  # Adjusted to access user email
+                    'email': employee.user_id.email,
                 },
                 'message': 'User registered successfully.'
             }, status=status.HTTP_201_CREATED)

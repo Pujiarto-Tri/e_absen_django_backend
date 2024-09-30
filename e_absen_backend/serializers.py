@@ -9,11 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('email', 'password')
 
     def create(self, validated_data):
         user = User.objects.create_user(
-            username=validated_data['username'],
+            username=validated_data['email'],  # Use email as username
             email=validated_data['email'],
             password=validated_data['password']
         )
@@ -24,13 +24,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ('user', 'user_id', 'employee_name', 'user_avatar', 'user_role', 'user_payout', 'user_shift', 'user_location')
+        fields = ('user',)
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = UserSerializer().create(user_data)
-        user_id = Employee.objects.create(user_id=user, **validated_data)
-        return user_id
+        employee = Employee.objects.create(user_id=user)
+        return employee
 
 class UserRegistrationView(generics.CreateAPIView):
     serializer_class = EmployeeSerializer
