@@ -24,7 +24,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ('user', 'employee_name', 'user_avatar', 'user_role', 'user_payout', 'user_shift', 'user_location')
+        fields = ('user_id', 'employee_name', 'user_avatar', 'user_role', 'user_payout', 'user_shift', 'user_location')
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
