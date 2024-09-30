@@ -12,7 +12,6 @@ class UserRegistrationView(generics.CreateAPIView):
 
         return Response({
             'user': {
-                'username': user_profile.user_id.username,
                 'email': user_profile.user_id.email,
                 'user_name': user_profile.user_name,
             },
