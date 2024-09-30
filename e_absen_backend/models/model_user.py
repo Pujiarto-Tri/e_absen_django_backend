@@ -19,4 +19,4 @@ class User_Id(models.Model):
     user_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user_name or self.user_id.username}'
+        return f'{self.name or self.user_id.username}'

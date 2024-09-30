@@ -7,7 +7,7 @@ from e_absen_backend.models.model_attendance import Attendance
 
 @admin.register(User_Id)
 class UserIdAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'user_name', 'user_avatar', 'user_role', 'user_location', 'user_payout', 'user_shift', 'is_active')
+    list_display = ('user_id', 'name', 'user_avatar', 'user_role', 'user_location', 'user_payout', 'user_shift', 'is_active')
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
