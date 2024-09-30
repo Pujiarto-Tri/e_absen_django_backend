@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^sg8@zlx80_ke=gt-=vhre1d6t2s^+k(!%$csy(86eotj+@+d%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eabsendjangobackend-production.up.railway.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['eabsendjangobackend-production.up.railway.app', '127.0.0.1', 'localhost', 'X390', 'play.googleapis.com']
 CSRF_TRUSTED_ORIGINS = ['https://eabsendjangobackend-production.up.railway.app']
 
 # Application definition

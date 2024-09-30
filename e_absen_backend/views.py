@@ -7,6 +7,7 @@ from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
 from .serializers import EmployeeSerializer
 
+@permission_classes([AllowAny])
 class UserRegistrationView(generics.CreateAPIView):
     serializer_class = EmployeeSerializer
     permission_classes = [AllowAny]
