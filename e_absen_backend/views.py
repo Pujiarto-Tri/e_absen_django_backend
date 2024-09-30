@@ -1,8 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny 
 
 class UserRegistrationView(generics.CreateAPIView):
     # from e_absen_backend.serializers import UserIdSerializer
@@ -21,6 +22,7 @@ class UserRegistrationView(generics.CreateAPIView):
     
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def login_view(request):
     email = request.data.get('email')
     password = request.data.get('password')
