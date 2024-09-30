@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 
 @permission_classes([AllowAny])
 class UserRegistrationView(generics.CreateAPIView):
-    
+    from e_absen_backend.serializers import UserIdSerializer
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
