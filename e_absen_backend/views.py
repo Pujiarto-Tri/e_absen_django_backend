@@ -4,23 +4,28 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny 
+from django.http import JsonResponse
+from .serializers import UserIdSerializer
 
 @permission_classes([AllowAny])
 class UserRegistrationView(generics.CreateAPIView):
-    from e_absen_backend.serializers import UserIdSerializer
+    serializer_class = UserIdSerializer
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user_profile = serializer.save()
-
-        return Response({
-            'user': {
-                'email': user_profile.user_id.email,
-            },
-            'message': 'User registered successfully.'
-        }, status=status.HTTP_201_CREATED)
-    
-
+        if serializer.is_valid():
+            user_profile = serializer.save()
+            return JsonResponse({
+                'user': {
+                    'email': user_profile.user.email,  # Adjusted to access user email
+                },
+                'message': 'User registered successfully.'
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return JsonResponse({
+                'errors': serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_view(request):

@@ -1,28 +1,6 @@
-from rest_framework import generics, status
-from rest_framework.response import Response
-from .serializers import UserIdSerializer  # corrected import path
-from django.http import JsonResponse
-from e_absen_backend.models.model_user import User_Id
 from rest_framework import serializers
 from django.contrib.auth.models import User
-
-class UserRegistrationView(generics.CreateAPIView):
-    serializer_class = UserIdSerializer()
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            user_profile = serializer.save()
-            return JsonResponse({
-                'user': {
-                    'email': user_profile.email,
-                },
-                'message': 'User registered successfully.'
-            }, status=status.HTTP_201_CREATED)
-        else:
-            return JsonResponse({
-                'errors': serializer.errors
-            }, status=status.HTTP_400_BAD_REQUEST)
+from e_absen_backend.models.model_user import User_Id
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
