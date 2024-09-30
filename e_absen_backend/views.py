@@ -5,9 +5,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny 
 
+
 class UserRegistrationView(generics.CreateAPIView):
     # from e_absen_backend.serializers import UserIdSerializer
-
+    @permission_classes([AllowAny])
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
