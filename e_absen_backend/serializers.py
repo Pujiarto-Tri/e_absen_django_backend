@@ -7,6 +7,7 @@ from .models.Employee import Employee
 from .models.Location import Location
 from .models.Role import Role
 from .models.Shift import Shift
+from .models.Attendance import Attendance
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -106,3 +107,15 @@ class UserRegistrationView(generics.CreateAPIView):
             return JsonResponse({
                 'errors': serializer.errors
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+class ShiftSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Shift
+        fields = ['shift_id', 'shift_name', 'shift_time_in', 'shift_time_out', 'is_active']
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    shift = ShiftSerializer(read_only=True) 
+    
+    class Meta:
+        model = Attendance
+        fields = ['user', 'shift', 'attendance_date', 'check_in_time', 'check_out_time', 'is_late', 'left_early', 'is_weekend']

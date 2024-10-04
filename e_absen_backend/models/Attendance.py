@@ -20,7 +20,7 @@ class Attendance(models.Model):
 
     def save(self, *args, **kwargs):
         # Check if the attendance date falls on a weekend (Saturday or Sunday)
-        if self.attendance_date.weekday() in [5, 6]:  # 5 = Saturday, 6 = Sunday
+        if self.attendance_date.weekday() in [5, 6]:  
             self.is_weekend = True
         
         # Check if the user checked in late
@@ -38,5 +38,5 @@ class Attendance(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.user.name} - {self.attendance_date} - {self.shift.shift_name}'
+        return f'{self.user.employee_name} - {self.attendance_date} - {self.shift.shift_name}'
 

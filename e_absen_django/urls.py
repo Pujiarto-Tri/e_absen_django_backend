@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from e_absen_backend.views import UserRegistrationView
-from e_absen_backend.views import login_view
+
 from rest_framework_simplejwt.views import TokenRefreshView
-from e_absen_backend.views import EmployeeProfileView
+
+from e_absen_backend.views import UserRegistrationView, EmployeeProfileView, login_view, CheckInView, CheckOutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,8 @@ urlpatterns = [
     path('api/login/', login_view, name='login'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/employee/profile/', EmployeeProfileView.as_view(), name='employee-profile'),
+    path('attendance/checkin/', CheckInView.as_view(), name='check-in'),
+    path('attendance/checkout/', CheckOutView.as_view(), name='check-out'),
 ]
 
 if settings.DEBUG:
