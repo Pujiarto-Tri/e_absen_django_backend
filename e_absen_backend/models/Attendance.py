@@ -1,7 +1,7 @@
 from django.db import models
-from e_absen_backend.models.model_user import Employee
+from e_absen_backend.models.Employee import Employee
 from datetime import time, date
-from e_absen_backend.models.model_shift_time import Shift  # Import the Shift model
+from e_absen_backend.models.Shift import Shift  # Import the Shift model
 
 class Attendance(models.Model):
     user = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)

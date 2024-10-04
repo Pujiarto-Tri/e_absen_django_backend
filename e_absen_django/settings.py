@@ -53,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #cors
     'corsheaders.middleware.CorsMiddleware',
     # WhiteNoise middleware should be listed after security middleware
     'django.middleware.security.SecurityMiddleware',

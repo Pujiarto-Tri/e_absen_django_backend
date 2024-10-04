@@ -3,9 +3,11 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny 
+from rest_framework.permissions import AllowAny, IsAuthenticated 
 from django.http import JsonResponse
 from .serializers import EmployeeSerializer
+from rest_framework.views import APIView
+from .models.Employee import Employee
 
 @permission_classes([AllowAny])
 class UserRegistrationView(generics.CreateAPIView):
@@ -50,3 +52,25 @@ def login_view(request):
         }, status=status.HTTP_200_OK)
     else:
         return Response({'error': 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
+
+@permission_classes([IsAuthenticated])
+class EmployeeProfileView(APIView):
+
+    def get(self, request):
+        try:
+            employee = Employee.objects.get(user_id=request.user)
+            serializer = EmployeeSerializer(employee)
+            return Response(serializer.data)
+        except Employee.DoesNotExist:
+            return Response({"detail": "Employee profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request):
+        try:
+            employee = Employee.objects.get(user_id=request.user)
+            serializer = EmployeeSerializer(employee, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Employee.DoesNotExist:
+            return Response({"detail": "Employee profile not found."}, status=status.HTTP_404_NOT_FOUND)

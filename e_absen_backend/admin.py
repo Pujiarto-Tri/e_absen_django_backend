@@ -1,9 +1,9 @@
 from django.contrib import admin
-from e_absen_backend.models.model_user import Employee
-from e_absen_backend.models.model_role import Role
-from e_absen_backend.models.model_shift_time import Shift
-from e_absen_backend.models.model_location import Location
-from e_absen_backend.models.model_attendance import Attendance
+from e_absen_backend.models.Employee import Employee
+from e_absen_backend.models.Role import Role
+from e_absen_backend.models.Shift import Shift
+from e_absen_backend.models.Location import Location
+from e_absen_backend.models.Attendance import Attendance
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):

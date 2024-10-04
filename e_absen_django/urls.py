@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from e_absen_backend.views import UserRegistrationView
 from e_absen_backend.views import login_view
 from rest_framework_simplejwt.views import TokenRefreshView
+from e_absen_backend.views import EmployeeProfileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('api/register/', UserRegistrationView.as_view(), name='user_registration'),
     path('api/login/', login_view, name='login'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/employee/profile/', EmployeeProfileView.as_view(), name='employee-profile'),
 ]
 
 if settings.DEBUG:

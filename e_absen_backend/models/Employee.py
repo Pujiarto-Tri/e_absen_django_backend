@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .model_role import Role
-from .model_shift_time import Shift
-from .model_location import Location
+from .Role import Role
+from .Shift import Shift
+from .Location import Location
 
 class Employee(models.Model):
     class Meta:
