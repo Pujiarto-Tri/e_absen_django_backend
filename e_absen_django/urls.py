@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from e_absen_backend.views import UserRegistrationView, EmployeeProfileView, login_view, CheckInView, CheckOutView
+from e_absen_backend.views import UserRegistrationView, EmployeeProfileView, login_view, CheckInView, CheckOutView, EmployeeAttendanceForCurrentMonthView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/employee/profile/', EmployeeProfileView.as_view(), name='employee-profile'),
     path('attendance/checkin/', CheckInView.as_view(), name='check-in'),
     path('attendance/checkout/', CheckOutView.as_view(), name='check-out'),
+    path('attendance/mine/', EmployeeAttendanceForCurrentMonthView.as_view(), name='employee-attendance-current-month'),
 ]
 
 if settings.DEBUG:

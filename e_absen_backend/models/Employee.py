@@ -11,10 +11,10 @@ class Employee(models.Model):
     
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     user_avatar = models.ImageField(blank=True, null=True, upload_to="avatar")
-    employee_name = models.CharField(max_length=200, blank=True, null=True) 
+    employee_name = models.CharField(max_length=200, blank=True) 
     is_active = models.BooleanField(default=True)
     user_role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
-    user_payout = models.CharField(max_length=500, null=True, blank=True)
+    user_payout = models.CharField(max_length=500, blank=True)
     user_shift = models.ForeignKey(Shift, on_delete=models.SET_NULL, null=True, blank=True)
     user_location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
 

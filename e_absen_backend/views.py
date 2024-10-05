@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from datetime import datetime
+from datetime import datetime, timedelta
 
 #Rest Framework
 from rest_framework import generics, status
@@ -127,3 +127,24 @@ class CheckOutView(APIView):
 
         serializer = AttendanceSerializer(attendance)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class EmployeeAttendanceForCurrentMonthView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        employee = request.user.employee
+
+        today = datetime.now()
+        first_day_of_month = today.replace(day=1)
+        last_day_of_month = today.replace(month=today.month % 12 + 1, day=1) - timedelta(days=1)
+
+        attendance_records = Attendance.objects.filter(
+            user=employee,
+            attendance_date__gte=first_day_of_month,
+            attendance_date__lte=last_day_of_month
+        )
+
+        serializer = AttendanceSerializer(attendance_records, many=True)
+        return Response(serializer.data)
+    
+    
