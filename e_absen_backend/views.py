@@ -64,7 +64,8 @@ class EmployeeProfileView(APIView):
 
     def get(self, request):
         try:
-            employee = Employee.objects.get(user_id=request.user)
+            employee = Employee.objects.get(all)
+            # employee = Employee.objects.get(user_id=request.user)
             serializer = EmployeeSerializer(employee)
             return Response(serializer.data)
         except Employee.DoesNotExist:
@@ -146,5 +147,4 @@ class EmployeeAttendanceForCurrentMonthView(APIView):
 
         serializer = AttendanceSerializer(attendance_records, many=True)
         return Response(serializer.data)
-    
     
